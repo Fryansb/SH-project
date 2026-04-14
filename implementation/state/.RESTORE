@@ -1,0 +1,35 @@
+# CONTEXTO DO PROJETO - RESTAURAR
+
+## Projeto: Plataforma de Gestão SH
+**Fase Atual**: 2/9 (22.2%)
+**Última Ação**: modified (2026-04-14T20:23:46.630851)
+
+## Próximo Passo
+Setup backend Django
+
+## Arquivos Criados (recentes):
+- backend/app/members/admin.py
+- backend/app/accounts/tests.py
+- backend/app/members/tests.py
+- backend/app/accounts/tests_auth.py
+- backend/app/accounts/test_auth.py
+- backend/app/members/test_api.py
+- backend/app/members/urls_api.md
+- backend/app/urls_api.py
+- backend/docs/API_ROUTES.md
+- backend/app/members/test_permissions.py
+
+## Decisões Importantes:
+- Nenhuma decisão registrada
+
+## Erros Encontrados:
+- Nenhum erro ainda
+
+## Status dos Testes:
+- Nenhum teste executado ainda
+
+## Para Continuar:
+"Confirmo contexto. Implementando Setup backend Django seguindo patterns estabelecidos."
+
+---
+*Gerado em: 2026-04-14T20:23:46.632580*

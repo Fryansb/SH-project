@@ -1,0 +1,484 @@
+{
+  "project": "Plataforma de Gest\u00e3o SH",
+  "current_phase": 2,
+  "total_phases": 9,
+  "progress": 22.2,
+  "last_action": "modified",
+  "last_action_time": "2026-04-14T20:23:46.630851",
+  "next_step": "Setup backend Django",
+  "completed_files": [
+    "backend/manage.py",
+    "backend/requirements.txt",
+    "backend/app/__init__.py",
+    "backend/app/urls.py",
+    "backend/app/wsgi.py",
+    "backend/app/settings/__init__.py",
+    "backend/app/settings/base.py",
+    "backend/app/settings/development.py",
+    "backend/app/accounts/__init__.py",
+    "backend/app/accounts/apps.py",
+    "backend/app/accounts/models.py",
+    "backend/app/accounts/serializers.py",
+    "backend/app/accounts/views.py",
+    "backend/app/accounts/urls.py",
+    "backend/app/members/__init__.py",
+    "backend/app/members/apps.py",
+    "backend/app/members/models.py",
+    "backend/app/members/serializers.py",
+    "backend/app/members/views.py",
+    "backend/app/members/urls.py",
+    "backend/app/core/__init__.py",
+    "backend/app/core/permissions.py",
+    "backend/app/core/exceptions.py",
+    "backend/README.md",
+    "backend/app/accounts/admin.py",
+    "backend/app/members/admin.py",
+    "backend/app/accounts/tests.py",
+    "backend/app/members/tests.py",
+    "backend/app/accounts/tests_auth.py",
+    "backend/app/accounts/test_auth.py",
+    "backend/app/members/test_api.py",
+    "backend/app/members/urls_api.md",
+    "backend/app/urls_api.py",
+    "backend/docs/API_ROUTES.md",
+    "backend/app/members/test_permissions.py"
+  ],
+  "decisions": [],
+  "errors": [],
+  "test_results": {},
+  "pending_tests": [],
+  "history": [
+    {
+      "action": "setup",
+      "path": "project_initialized",
+      "phase": 0,
+      "time": "2026-04-14T18:48:21.522208"
+    },
+    {
+      "action": "created",
+      "path": "backend/manage.py",
+      "phase": 2,
+      "time": "2026-04-14T19:53:39.983922"
+    },
+    {
+      "action": "created",
+      "path": "backend/requirements.txt",
+      "phase": 2,
+      "time": "2026-04-14T19:53:40.030312"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/__init__.py",
+      "phase": 2,
+      "time": "2026-04-14T19:53:40.057036"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/urls.py",
+      "phase": 2,
+      "time": "2026-04-14T19:53:40.081030"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/wsgi.py",
+      "phase": 2,
+      "time": "2026-04-14T19:53:40.103043"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/settings/__init__.py",
+      "phase": 2,
+      "time": "2026-04-14T19:53:40.127806"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/settings/base.py",
+      "phase": 2,
+      "time": "2026-04-14T19:53:40.147361"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/settings/development.py",
+      "phase": 2,
+      "time": "2026-04-14T19:53:40.166208"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/accounts/__init__.py",
+      "phase": 2,
+      "time": "2026-04-14T19:53:40.186198"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/accounts/apps.py",
+      "phase": 2,
+      "time": "2026-04-14T19:53:40.208342"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/accounts/models.py",
+      "phase": 2,
+      "time": "2026-04-14T19:53:40.228541"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/accounts/serializers.py",
+      "phase": 2,
+      "time": "2026-04-14T19:53:40.260052"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/accounts/views.py",
+      "phase": 2,
+      "time": "2026-04-14T19:53:40.283568"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/accounts/urls.py",
+      "phase": 2,
+      "time": "2026-04-14T19:53:40.304161"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/members/__init__.py",
+      "phase": 2,
+      "time": "2026-04-14T19:53:40.328106"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/members/apps.py",
+      "phase": 2,
+      "time": "2026-04-14T19:53:40.349514"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/members/models.py",
+      "phase": 2,
+      "time": "2026-04-14T19:53:40.370464"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/members/serializers.py",
+      "phase": 2,
+      "time": "2026-04-14T19:53:40.389919"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/members/views.py",
+      "phase": 2,
+      "time": "2026-04-14T19:53:40.408841"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/members/urls.py",
+      "phase": 2,
+      "time": "2026-04-14T19:53:40.427905"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/core/__init__.py",
+      "phase": 2,
+      "time": "2026-04-14T19:53:40.447042"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/core/permissions.py",
+      "phase": 2,
+      "time": "2026-04-14T19:53:40.473831"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/core/exceptions.py",
+      "phase": 2,
+      "time": "2026-04-14T19:53:40.503039"
+    },
+    {
+      "action": "created",
+      "path": "backend/README.md",
+      "phase": 2,
+      "time": "2026-04-14T19:53:40.555452"
+    },
+    {
+      "action": "created",
+      "path": "backend/manage.py",
+      "phase": 2,
+      "time": "2026-04-14T19:55:19.262505"
+    },
+    {
+      "action": "created",
+      "path": "backend/requirements.txt",
+      "phase": 2,
+      "time": "2026-04-14T19:55:19.292898"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/__init__.py",
+      "phase": 2,
+      "time": "2026-04-14T19:55:19.319164"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/urls.py",
+      "phase": 2,
+      "time": "2026-04-14T19:55:19.348277"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/wsgi.py",
+      "phase": 2,
+      "time": "2026-04-14T19:55:19.378970"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/settings/__init__.py",
+      "phase": 2,
+      "time": "2026-04-14T19:55:19.404526"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/settings/base.py",
+      "phase": 2,
+      "time": "2026-04-14T19:55:19.430683"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/settings/development.py",
+      "phase": 2,
+      "time": "2026-04-14T19:55:19.463785"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/accounts/__init__.py",
+      "phase": 2,
+      "time": "2026-04-14T19:55:19.487976"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/accounts/apps.py",
+      "phase": 2,
+      "time": "2026-04-14T19:55:19.511024"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/accounts/models.py",
+      "phase": 2,
+      "time": "2026-04-14T19:55:19.537324"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/accounts/serializers.py",
+      "phase": 2,
+      "time": "2026-04-14T19:55:19.567470"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/accounts/views.py",
+      "phase": 2,
+      "time": "2026-04-14T19:55:19.596582"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/accounts/urls.py",
+      "phase": 2,
+      "time": "2026-04-14T19:55:19.619963"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/members/__init__.py",
+      "phase": 2,
+      "time": "2026-04-14T19:55:19.651491"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/members/apps.py",
+      "phase": 2,
+      "time": "2026-04-14T19:55:19.676261"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/members/models.py",
+      "phase": 2,
+      "time": "2026-04-14T19:55:19.708280"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/members/serializers.py",
+      "phase": 2,
+      "time": "2026-04-14T19:55:19.736076"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/members/views.py",
+      "phase": 2,
+      "time": "2026-04-14T19:55:19.761442"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/members/urls.py",
+      "phase": 2,
+      "time": "2026-04-14T19:55:19.786986"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/core/__init__.py",
+      "phase": 2,
+      "time": "2026-04-14T19:55:19.818287"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/core/permissions.py",
+      "phase": 2,
+      "time": "2026-04-14T19:55:19.846702"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/core/exceptions.py",
+      "phase": 2,
+      "time": "2026-04-14T19:55:19.877221"
+    },
+    {
+      "action": "created",
+      "path": "backend/README.md",
+      "phase": 2,
+      "time": "2026-04-14T19:55:19.900267"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/accounts/admin.py",
+      "phase": 2,
+      "time": "2026-04-14T19:59:13.364974"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/members/admin.py",
+      "phase": 2,
+      "time": "2026-04-14T19:59:13.389440"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/accounts/tests.py",
+      "phase": 2,
+      "time": "2026-04-14T19:59:13.411156"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/members/tests.py",
+      "phase": 2,
+      "time": "2026-04-14T19:59:13.443592"
+    },
+    {
+      "action": "modified",
+      "path": "backend/app/accounts/views.py",
+      "phase": 2,
+      "time": "2026-04-14T20:02:58.736168"
+    },
+    {
+      "action": "modified",
+      "path": "backend/app/accounts/urls.py",
+      "phase": 2,
+      "time": "2026-04-14T20:02:58.880001"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/accounts/tests_auth.py",
+      "phase": 2,
+      "time": "2026-04-14T20:02:59.002311"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/accounts/test_auth.py",
+      "phase": 2,
+      "time": "2026-04-14T20:03:53.560454"
+    },
+    {
+      "action": "modified",
+      "path": "backend/app/accounts/test_auth.py",
+      "phase": 2,
+      "time": "2026-04-14T20:04:59.214481"
+    },
+    {
+      "action": "modified",
+      "path": "backend/app/members/serializers.py",
+      "phase": 2,
+      "time": "2026-04-14T20:07:58.386531"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/members/test_api.py",
+      "phase": 2,
+      "time": "2026-04-14T20:07:58.455299"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/members/urls_api.md",
+      "phase": 2,
+      "time": "2026-04-14T20:07:58.522108"
+    },
+    {
+      "action": "modified",
+      "path": "backend/app/members/serializers.py",
+      "phase": 2,
+      "time": "2026-04-14T20:08:37.656740"
+    },
+    {
+      "action": "modified",
+      "path": "backend/app/members/serializers.py",
+      "phase": 2,
+      "time": "2026-04-14T20:09:02.385592"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/urls_api.py",
+      "phase": 2,
+      "time": "2026-04-14T20:10:30.205439"
+    },
+    {
+      "action": "modified",
+      "path": "backend/app/urls.py",
+      "phase": 2,
+      "time": "2026-04-14T20:10:30.225049"
+    },
+    {
+      "action": "created",
+      "path": "backend/docs/API_ROUTES.md",
+      "phase": 2,
+      "time": "2026-04-14T20:10:30.244520"
+    },
+    {
+      "action": "modified",
+      "path": "backend/app/members/views.py",
+      "phase": 2,
+      "time": "2026-04-14T20:11:00.886249"
+    },
+    {
+      "action": "created",
+      "path": "backend/app/members/test_permissions.py",
+      "phase": 2,
+      "time": "2026-04-14T20:11:00.938256"
+    },
+    {
+      "action": "created",
+      "path": "backend/docs/API_ROUTES.md",
+      "phase": 2,
+      "time": "2026-04-14T20:11:00.978214"
+    },
+    {
+      "action": "modified",
+      "path": "backend/requirements.txt",
+      "phase": 2,
+      "time": "2026-04-14T20:23:46.517839"
+    },
+    {
+      "action": "modified",
+      "path": "backend/app/settings/base.py",
+      "phase": 2,
+      "time": "2026-04-14T20:23:46.573471"
+    },
+    {
+      "action": "modified",
+      "path": "backend/app/urls.py",
+      "phase": 2,
+      "time": "2026-04-14T20:23:46.630903"
+    }
+  ]
+}
