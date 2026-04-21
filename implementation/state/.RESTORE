@@ -2,22 +2,22 @@
 
 ## Projeto: Plataforma de Gestão SH
 **Fase Atual**: 2/9 (22.2%)
-**Última Ação**: modified (2026-04-14T20:23:46.630851)
+**Última Ação**: modified (2026-04-14T22:04:26.185819)
 
 ## Próximo Passo
 Setup backend Django
 
 ## Arquivos Criados (recentes):
-- backend/app/members/admin.py
-- backend/app/accounts/tests.py
-- backend/app/members/tests.py
-- backend/app/accounts/tests_auth.py
-- backend/app/accounts/test_auth.py
-- backend/app/members/test_api.py
-- backend/app/members/urls_api.md
-- backend/app/urls_api.py
-- backend/docs/API_ROUTES.md
-- backend/app/members/test_permissions.py
+- frontend/src/setupTests.ts
+- frontend/src/components/auth/__tests__/LoginForm.test.tsx
+- frontend/src/pages/__tests__
+- frontend/src/pages/__tests__/Members.test.tsx
+- /home/ryan/.copilot/session-state/ca238eb1-a2c9-4494-ac63-a07f13aea98c/plan.md
+- frontend/src/pages/__tests__/Members.admin.test.tsx
+- frontend/src/store/index.ts
+- frontend/src/store/authSlice.ts
+- frontend/src/store/membersSlice.ts
+- frontend/index.html
 
 ## Decisões Importantes:
 - Nenhuma decisão registrada
@@ -32,4 +32,4 @@ Setup backend Django
 "Confirmo contexto. Implementando Setup backend Django seguindo patterns estabelecidos."
 
 ---
-*Gerado em: 2026-04-14T20:23:46.632580*
+*Gerado em: 2026-04-14T22:04:26.189415*

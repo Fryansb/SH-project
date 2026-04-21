@@ -1,4 +1,4 @@
-# Especificação Técnica - Plataforma de Gestão da Software House
+sigapecificação Técnica - Plataforma de Gestão da Software House
 
 **Data**: 14/04/2026
 **Base**: PRD.md v1.0
