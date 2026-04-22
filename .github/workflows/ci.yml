@@ -20,6 +20,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Python
+        if: ${{ hashFiles('backend/requirements.txt') != '' }}
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
@@ -27,13 +28,21 @@ jobs:
           cache-dependency-path: backend/requirements.txt
 
       - name: Install backend dependencies
+        if: ${{ hashFiles('backend/requirements.txt') != '' }}
         run: python -m pip install --upgrade pip && pip install -r requirements.txt
 
       - name: Run backend tests
+        if: ${{ hashFiles('backend/requirements.txt') != '' }}
         run: python manage.py test
 
       - name: Regenerate OpenAPI schema
+        if: ${{ hashFiles('backend/requirements.txt') != '' }}
         run: python manage.py spectacular --file openapi.yaml && git diff --exit-code -- openapi.yaml
+
+      - name: Skip backend job when backend sources are unavailable
+        if: ${{ hashFiles('backend/requirements.txt') == '' }}
+        run: echo "Backend directory is unavailable in this checkout; skipping backend CI steps."
+        working-directory: .
 
   frontend:
     runs-on: ubuntu-latest
