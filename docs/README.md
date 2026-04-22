@@ -1,5 +1,9 @@
 # Documentação do Projeto - Plataforma de Gestão SH
 
+## Ponto de Entrada Para IA
+
+Se você for usar esta documentação com uma IA, comece por [LEIA_PRIMEIRO.md](LEIA_PRIMEIRO.md).
+
 ## Índice
 
 Este diretório contém toda a documentação organizada segundo a metodologia Spec-Driven Development (SDD).

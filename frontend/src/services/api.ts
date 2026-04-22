@@ -1,7 +1,12 @@
 import axios from 'axios';
 import authAPI from './auth';
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+declare global {
+  // Injected by Vite at build time; left undefined in Jest and local dev.
+  var __API_URL__: string | undefined;
+}
+
+const API_BASE = globalThis.__API_URL__ || 'http://localhost:8000/api';
 
 export const api = axios.create({
   baseURL: API_BASE,

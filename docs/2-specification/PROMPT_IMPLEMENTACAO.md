@@ -11,6 +11,8 @@
 ## Contexto do Projeto
 Este prompt implementa as funcionalidades iniciais da plataforma de gestão da Software House conforme PRD.md e Spec.md. A plataforma organiza desenvolvedores autônomos em uma estrutura colaborativa com transparência e gestão de prioridade.
 
+O frontend já inclui uma sidebar protegida por autenticação, um `PageShell` compartilhado e páginas reais para `Dashboard`, `Projects`, `Hours`, `Priority`, `Members` e `Reports`.
+
 ## Tarefa Específica
 Implementar o sistema de autenticação com roles (admin/member) e gestão básica de membros conforme Spec.md seções "Autenticação" e "Members". Isso inclui login, registro, perfis e controle de acesso básico.
 
@@ -25,6 +27,7 @@ Implementar o sistema de autenticação com roles (admin/member) e gestão bási
 - [ ] Setup frontend React + TypeScript com estrutura
 - [ ] Criar components de Login e Register
 - [ ] Criar Dashboard básico diferenciado por role
+- [ ] Documentar a navegação lateral protegida e os shells de páginas já existentes no frontend
 
 ## Padrões Técnicos
 **IMPORTANTE: Usar EXATAMENTE os padrões documentados em:**
@@ -79,17 +82,20 @@ agencia-gestao/
 ├── frontend/
 │   ├── src/
 │   │   ├── components/
-│   │   │   ├── common/
-│   │   │   │   ├── Button.tsx
-│   │   │   │   ├── Input.tsx
-│   │   │   │   └── Layout.tsx
-│   │   │   └── auth/
-│   │   │       ├── LoginForm.tsx
-│   │   │       └── RegisterForm.tsx
+│   │   │   ├── auth/
+│   │   │   │   └── LoginForm.tsx
+│   │   │   └── common/
+│   │   │       ├── BaseButton.tsx
+│   │   │       ├── BaseInput.tsx
+│   │   │       └── PageShell.tsx
 │   │   ├── pages/
-│   │   │   ├── Login.tsx
 │   │   │   ├── Dashboard.tsx
-│   │   │   └── Members.tsx
+│   │   │   ├── Hours.tsx
+│   │   │   ├── Login.tsx
+│   │   │   ├── Members.tsx
+│   │   │   ├── Priority.tsx
+│   │   │   ├── Projects.tsx
+│   │   │   └── Reports.tsx
 │   │   ├── services/
 │   │   │   ├── api.ts
 │   │   │   └── auth.ts
@@ -135,6 +141,14 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
   // Implementation following Material UI patterns
 };
 ```
+
+### Frontend já consolidado
+- `App.tsx` contém rotas protegidas com `RequireAuth` e `RequireAdmin`.
+- O menu lateral aparece apenas para usuários autenticados.
+- `Members` e `Reports` aparecem apenas para admin.
+- `PageShell` padroniza título e descrição das páginas internas.
+- `Login.tsx` redireciona para `Dashboard` quando já existe access token.
+- O backend aceita login fixo via `FIXED_LOGIN_EMAIL` e `FIXED_LOGIN_PASSWORD` nas variáveis locais de desenvolvimento.
 
 ## Critérios de Sucesso
 

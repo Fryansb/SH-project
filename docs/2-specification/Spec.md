@@ -20,8 +20,8 @@ sigapecificação Técnica - Plataforma de Gestão da Software House
 - **Queue**: Celery + Redis
 
 ### Frontend
-- **Dashboard**: React + TypeScript
-- **Landing Page**: Next.js
+- **App Shell**: React + TypeScript
+- **Routing**: React Router
 - **State Management**: Redux Toolkit
 - **UI Components**: Material UI (follow docs)
 - **Charts**: Chart.js ou Recharts
@@ -45,16 +45,21 @@ agencia-gestao/
 ├── frontend/
 │   ├── src/
 │   │   ├── components/        # Reusáveis
+│   │   │   ├── auth/
+│   │   │   └── common/        # BaseButton, BaseInput, PageShell
 │   │   ├── pages/             # Páginas principais
+│   │   │   ├── Dashboard.tsx
+│   │   │   ├── Hours.tsx
+│   │   │   ├── Login.tsx
+│   │   │   ├── Members.tsx
+│   │   │   ├── Priority.tsx
+│   │   │   ├── Projects.tsx
+│   │   │   └── Reports.tsx
 │   │   ├── hooks/             # Custom hooks
 │   │   ├── services/          # API calls
 │   │   ├── store/             # Redux store
 │   │   └── utils/             # Helpers
 │   └── package.json
-└── landing/                   # Next.js
-    ├── pages/
-    ├── components/
-    └── package.json
 ```
 
 ## Models Principais (Backend)
@@ -138,20 +143,29 @@ class Contract(models.Model):
 - `BaseButton` - Botões padronizados
 - `BaseInput` - Campos de formulário
 - `LoadingSpinner` - Estados de loading
-- `Layout` - Layout padrão das páginas
+- `PageShell` - Cabeçalho e descrição padronizados nas páginas internas
+
+### Navegação Implementada
+- `App.tsx` monta uma sidebar permanente em `Drawer` para usuários autenticados.
+- Rotas expostas no frontend: `/login`, `/dashboard`, `/projects`, `/hours`, `/priority`, `/members`, `/reports`.
+- `RequireAuth` protege páginas internas para qualquer usuário autenticado.
+- `RequireAdmin` protege `Members` e `Reports`.
+- O menu lateral mostra apenas itens permitidos para o papel atual.
+- O login redireciona para `/dashboard` quando já existe token salvo.
+
+### Estado Implementado no Frontend
+- `Dashboard`, `Projects`, `Hours`, `Priority` e `Reports` já existem como páginas reais no frontend.
+- `Projects`, `Hours`, `Priority` e `Reports` são shells de interface alinhados ao MVP, prontos para consumir os endpoints quando forem concluídos no backend.
+- `PageShell` foi criado para evitar duplicação de título e texto introdutório nas páginas.
 
 ### Dashboard Principal
 ```typescript
-interface DashboardProps {
-  user: User;
-}
+const Dashboard: React.FC = () => {
+  const user = authAPI.getUser();
+  const isAdmin = user?.role === 'admin';
 
-const Dashboard: React.FC<DashboardProps> = ({ user }) => {
-  // Implementar usando componentes base:
-  // <Layout title="Dashboard">
-  //   <DataTable /> para listas
-  //   <LoadingSpinner /> para loading
-  // </Layout>
+  // Usa PageShell + cards com atalhos para Projects, Hours, Priority e, se admin,
+  // Members e Reports.
 };
 ```
 
@@ -186,40 +200,57 @@ const TimeTracker: React.FC = () => {
 };
 ```
 
+### Autenticação de Desenvolvimento
+- O backend aceita login fixo via variáveis de ambiente locais `FIXED_LOGIN_EMAIL` e `FIXED_LOGIN_PASSWORD`.
+- Quando essas variáveis existem e as credenciais enviadas batem com os valores locais, o sistema cria ou ajusta o usuário e emite JWT normalmente.
+- Esse fluxo é apenas para desenvolvimento local e não deve ser versionado.
+
 ## API Endpoints
 
 ### Autenticação
-- `POST /api/auth/login` - Login
-- `POST /api/auth/refresh` - Refresh token
-- `POST /api/auth/logout` - Logout
+- `POST /api/auth/login/` - Login
+- `POST /api/auth/refresh/` - Refresh token
+- `POST /api/auth/logout/` - Logout
 
 ### Members (Admin only)
-- `GET /api/members` - Listar todos
-- `POST /api/members` - Criar novo
-- `PUT /api/members/{id}` - Atualizar
-- `DELETE /api/members/{id}` - Remover
+- `GET /api/members/` - Listar todos
+- `POST /api/members/` - Criar novo
+- `PUT /api/members/{id}/` - Atualizar
+- `DELETE /api/members/{id}/` - Remover
+
+### Stacks (Admin only)
+- `GET /api/stacks/` - Listar
+- `POST /api/stacks/` - Criar
+- `PUT /api/stacks/{id}/` - Atualizar
+- `DELETE /api/stacks/{id}/` - Remover
 
 ### Projects
-- `GET /api/projects` - Listar (filtrar por role)
-- `POST /api/projects` - Criar (admin)
-- `GET /api/projects/{id}` - Detalhes
-- `PUT /api/projects/{id}` - Atualizar
-- `POST /api/projects/{id}/assign` - Alocar membros
+- `GET /api/projects/` - Listar (filtrar por role)
+- `POST /api/projects/` - Criar (admin)
+- `GET /api/projects/{id}/` - Detalhes
+- `PUT /api/projects/{id}/` - Atualizar
+- `PATCH /api/projects/{id}/` - Atualizar parcialmente
+- `POST /api/projects/{id}/assign/` - Alocar membros
 
 ### Hours
-- `GET /api/hours/my-hours` - Minhas horas
-- `POST /api/hours` - Registrar horas
-- `GET /api/hours/project/{id}` - Horas por projeto
+- `GET /api/hours/` - Listar lançamentos
+- `GET /api/hours/{id}/` - Detalhes
+- `POST /api/hours/` - Registrar horas
+- `PUT /api/hours/{id}/` - Atualizar lançamento
+- `PATCH /api/hours/{id}/` - Atualizar parcialmente
+- `DELETE /api/hours/{id}/` - Remover lançamento
+- `GET /api/hours/my-hours/` - Minhas horas
+- `GET /api/hours/project/{id}/` - Horas por projeto
 
 ### Priority Queue
-- `GET /api/priority/queue` - Fila atual (admin)
-- `POST /api/priority/recalculate` - Recalcular scores
-- `PUT /api/priority/reorder` - Reordenar manualmente
+- `GET /api/priority/queue/` - Fila atual para usuários autenticados, com a posição do membro logado
+- `POST /api/priority/recalculate/` - Recalcular scores (admin)
+- `PUT /api/priority/reorder/` - Reordenar manualmente (admin)
 
 ### Reports
-- `GET /api/reports/performance` - Relatório de desempenho
-- `GET /api/reports/financial` - Relatório financeiro
-- `GET /api/reports/hours` - Relatório de horas
+- `GET /api/reports/performance/` - Relatório de desempenho
+- `GET /api/reports/financial/` - Relatório financeiro
+- `GET /api/reports/hours/` - Relatório de horas
 
 ## Permissões e Níveis de Acesso
 
@@ -323,11 +354,10 @@ def calculate_finances(project):
   - Redis URL
 
 ### Frontend
-- Vercel para Next.js
-- Netlify ou similar para React
+- Vercel, Netlify ou similar para Vite/React SPA
 - Environment variables:
-  - REACT_APP_API_URL
-  - REACT_APP_ENV
+    - VITE_API_URL
+    - VITE_ENV
 
 ## Segurança
 
