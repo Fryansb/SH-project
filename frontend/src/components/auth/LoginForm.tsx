@@ -21,10 +21,12 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
       return;
     }
 
+    const normalizedEmail = email.trim().toLowerCase();
+
     setLoading(true);
     setError('');
     try {
-      await authAPI.login(email, password);
+      await authAPI.login(normalizedEmail, password);
       if (onSuccess) {
         onSuccess();
       }
