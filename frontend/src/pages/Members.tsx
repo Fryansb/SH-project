@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import {
+  Alert,
   Container,
   Typography,
   List,
   ListItem,
   ListItemText,
   Box,
+  Card,
+  CardContent,
   Button,
   Dialog,
   DialogTitle,
@@ -64,6 +67,9 @@ const MembersPage: React.FC = () => {
   const [formWeekly, setFormWeekly] = useState<number | ''>('');
   const [stackOptions, setStackOptions] = useState<StackOption[]>([]);
   const [selectedStackIds, setSelectedStackIds] = useState<number[]>([]);
+  const [newStackName, setNewStackName] = useState('');
+  const [stackCreationError, setStackCreationError] = useState<string | null>(null);
+  const [stackCreating, setStackCreating] = useState(false);
 
   const user = authAPI.getUser();
   const isAdmin = user?.role === 'admin';
@@ -103,6 +109,29 @@ const MembersPage: React.FC = () => {
 
   const handleClose = () => {
     setOpenDialog(false);
+  };
+
+  const handleCreateStack = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const normalizedName = newStackName.trim();
+    if (!normalizedName) {
+      setStackCreationError('Informe o nome da stack.');
+      return;
+    }
+
+    try {
+      setStackCreating(true);
+      setStackCreationError(null);
+      await stacksAPI.create({ name: normalizedName });
+      setNewStackName('');
+      const updatedStacks = await stacksAPI.list();
+      setStackOptions(updatedStacks);
+    } catch {
+      setStackCreationError('Não foi possível cadastrar a stack.');
+    } finally {
+      setStackCreating(false);
+    }
   };
 
   const toggleStack = (stackId: number) => {
@@ -157,6 +186,56 @@ const MembersPage: React.FC = () => {
     <Container>
       <Box sx={{ mt: 4 }}>
         <Typography variant="h5" gutterBottom>Membros</Typography>
+
+        {isAdmin && (
+          <Card sx={{ mb: 3 }}>
+            <CardContent>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                <Box>
+                  <Typography variant="h6" gutterBottom>Stacks</Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Cadastre as stacks que serão usadas em membros, projetos e prioridade.
+                  </Typography>
+                </Box>
+
+                {stackCreationError ? (
+                  <Alert severity="error">{stackCreationError}</Alert>
+                ) : null}
+
+                <Box component="form" onSubmit={handleCreateStack}>
+                  <MuiStack direction={{ xs: 'column', sm: 'row' }} spacing={2} alignItems={{ sm: 'flex-start' }}>
+                    <TextField
+                      label="Nome da stack"
+                      value={newStackName}
+                      onChange={(e) => setNewStackName(e.target.value)}
+                      fullWidth
+                    />
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      disabled={stackCreating}
+                      sx={{ minWidth: 180 }}
+                    >
+                      {stackCreating ? 'Cadastrando...' : 'Cadastrar stack'}
+                    </Button>
+                  </MuiStack>
+                </Box>
+
+                {stackOptions.length > 0 ? (
+                  <MuiStack direction="row" spacing={1} useFlexGap flexWrap="wrap">
+                    {stackOptions.map((stackOption) => (
+                      <Chip key={stackOption.id} label={stackOption.name} size="small" />
+                    ))}
+                  </MuiStack>
+                ) : (
+                  <Typography variant="body2" color="text.secondary">
+                    Nenhuma stack cadastrada ainda.
+                  </Typography>
+                )}
+              </Box>
+            </CardContent>
+          </Card>
+        )}
 
         {isAdmin && (
           <Box sx={{ mb: 2 }}>

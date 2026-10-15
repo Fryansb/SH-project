@@ -98,6 +98,49 @@ describe('ProjectsPage', () => {
     });
   });
 
+  it('allows admins to assign multiple members to a project', async () => {
+    mockedMembersAPI.list.mockResolvedValueOnce([
+      {
+        id: 7,
+        user_email: 'membro1@test.com',
+        weekly_hours: 40,
+        available_hours: 20,
+        rating: 0,
+        priority_score: 0,
+      },
+      {
+        id: 8,
+        user_email: 'membro2@test.com',
+        weekly_hours: 40,
+        available_hours: 18,
+        rating: 0,
+        priority_score: 0,
+      },
+    ] as any);
+
+    render(<ProjectsPage />);
+
+    fireEvent.click(await screen.findByRole('button', { name: 'Novo projeto' }));
+    fireEvent.change(await screen.findByLabelText('Nome'), { target: { value: 'Novo projeto' } });
+    fireEvent.change(screen.getByLabelText('Cliente'), { target: { value: 'Cliente C' } });
+    fireEvent.change(screen.getByLabelText('Descrição'), { target: { value: 'Novo projeto SH' } });
+    fireEvent.change(screen.getByLabelText('Horas estimadas'), { target: { value: '60' } });
+    fireEvent.change(screen.getByLabelText('Budget'), { target: { value: '5000.00' } });
+    fireEvent.change(screen.getByLabelText('Deadline'), { target: { value: '2026-08-01' } });
+    fireEvent.click(await screen.findByLabelText('Django'));
+    fireEvent.click(await screen.findByLabelText('membro1@test.com'));
+    fireEvent.click(await screen.findByLabelText('membro2@test.com'));
+    fireEvent.click(screen.getByRole('button', { name: 'Salvar' }));
+
+    await waitFor(() => {
+      expect(mockedProjectsAPI.create).toHaveBeenCalledWith(
+        expect.objectContaining({
+          assigned_member_ids: [7, 8],
+        }),
+      );
+    });
+  });
+
   it('opens the project documentation dialog', async () => {
     mockedProjectsAPI.list.mockResolvedValueOnce([
       {

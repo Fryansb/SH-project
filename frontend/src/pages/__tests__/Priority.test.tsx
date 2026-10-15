@@ -132,6 +132,73 @@ describe('PriorityPage', () => {
     });
   });
 
+  it('dims members without matching stacks when a project is selected', async () => {
+    mockedAuthAPI.getUser.mockReturnValue({ id: 1, email: 'admin@test.com', role: 'admin' } as any);
+    mockedProjectsAPI.list.mockResolvedValue([
+      {
+        id: 11,
+        name: 'Portal SH',
+        client_name: 'Cliente A',
+        description: 'Portal principal',
+        status: 'lead',
+        required_stacks: ['Django'],
+        estimated_hours: 120,
+        budget: '10000.00',
+        house_fee: '1000.00',
+        deadline: '2026-06-01',
+      },
+    ] as any);
+    mockedPriorityAPI.queue.mockResolvedValue({
+      count: 2,
+      current_member_position: null,
+      project: {
+        id: 11,
+        name: 'Portal SH',
+        required_stacks: ['Django'],
+      },
+      results: [
+        {
+          id: 7,
+          member_id: 7,
+          member_name: 'member@test.com',
+          member_email: 'member@test.com',
+          priority_score: 25,
+          stack_bonus: 20,
+          matching_stacks: ['Django'],
+          available_hours: 20,
+          weekly_hours: 40,
+          rating: 4,
+          last_project_date: '2026-04-13T10:00:00Z',
+          position: 1,
+          is_current_user: false,
+        },
+        {
+          id: 8,
+          member_id: 8,
+          member_name: 'other@test.com',
+          member_email: 'other@test.com',
+          priority_score: 0,
+          stack_bonus: 0,
+          matching_stacks: [],
+          available_hours: 12,
+          weekly_hours: 40,
+          rating: 3,
+          last_project_date: '2026-04-18T10:00:00Z',
+          position: 2,
+          is_current_user: false,
+        },
+      ],
+    } as any);
+
+    render(<PriorityPage />);
+
+    const matchingCard = (await screen.findByText('member@test.com')).closest('.MuiCard-root') as HTMLElement;
+    const transparentCard = (await screen.findByText('other@test.com')).closest('.MuiCard-root') as HTMLElement;
+
+    expect(matchingCard).not.toHaveStyle({ opacity: '0.35' });
+    expect(transparentCard).toHaveStyle({ opacity: '0.35' });
+  });
+
   it('lets admins reorder the queue manually', async () => {
     mockedAuthAPI.getUser.mockReturnValue({ id: 1, email: 'admin@test.com', role: 'admin' } as any);
     mockedProjectsAPI.list.mockResolvedValue([

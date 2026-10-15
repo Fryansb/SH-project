@@ -48,12 +48,11 @@ LIBRARY_LIST = [
     ("ESLint", "eslint"),
 ]
 
+
 def generate_prompt_for_lib(lib_name, lib_file_name):
     """Gera prompt específico para uma biblioteca"""
-    return PROMPT_BASE.format(
-        lib_name=lib_name,
-        lib_file_name=lib_file_name
-    )
+    return PROMPT_BASE.format(lib_name=lib_name, lib_file_name=lib_file_name)
+
 
 def show_main_command():
     """Mostra comando principal"""
@@ -61,6 +60,7 @@ def show_main_command():
     print("=" * 50)
     print(generate_prompt_for_lib("[NOME_DA_BIBLIOTECA]", "[nome-arquivo]"))
     print("=" * 50)
+
 
 def show_lib_commands():
     """Mostra comandos específicos por biblioteca"""
@@ -71,13 +71,14 @@ def show_lib_commands():
         print(generate_prompt_for_lib(lib_name, lib_file))
         print("-" * 50)
 
+
 def show_all_command():
     """Mostra comando para gerar todas"""
     all_command = f"""
 # Gerar Documentação - Múltiplas Bibliotecas
 
 ## Tarefa
-Gerar documentação completa para TODAS as bibliotecas da lista abaixo: {', '.join([lib for lib, _ in LIBRARY_LIST])}
+Gerar documentação completa para TODAS as bibliotecas da lista abaixo: {", ".join([lib for lib, _ in LIBRARY_LIST])}
 
 ## Processo:
 1. Gerar doc da primeira biblioteca
@@ -94,15 +95,20 @@ Gerar documentação completa para TODAS as bibliotecas da lista abaixo: {', '.j
     print("\n📋 Comando Para Gerar TODAS:")
     print(all_command)
 
+
 def main():
-    parser = argparse.ArgumentParser(description="Gerar prompts para documentação de bibliotecas")
+    parser = argparse.ArgumentParser(
+        description="Gerar prompts para documentação de bibliotecas"
+    )
     parser.add_argument("--lib", help="Nome específico da biblioteca")
     parser.add_argument("--main", action="store_true", help="Mostrar comando principal")
-    parser.add_argument("--list", action="store_true", help="Listar bibliotecas disponíveis")
+    parser.add_argument(
+        "--list", action="store_true", help="Listar bibliotecas disponíveis"
+    )
     parser.add_argument("--all", action="store_true", help="Mostrar comando para todas")
-    
+
     args = parser.parse_args()
-    
+
     if args.main:
         show_main_command()
     elif args.list:
@@ -119,16 +125,19 @@ def main():
             if name.lower() == args.lib.lower():
                 lib_file = file
                 break
-        
+
         if not lib_file:
             print(f"❌ Biblioteca não encontrada. Use --list para ver disponíveis.")
             sys.exit(1)
-        
+
         print(f"📝 Prompt para {args.lib}:")
         print("-" * 50)
         print(generate_prompt_for_lib(args.lib, lib_file))
     else:
-        print("Use --main para comando principal ou --lib <nome> para biblioteca específica.")
+        print(
+            "Use --main para comando principal ou --lib <nome> para biblioteca específica."
+        )
+
 
 if __name__ == "__main__":
     main()

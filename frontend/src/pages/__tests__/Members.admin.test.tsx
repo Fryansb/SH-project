@@ -15,6 +15,7 @@ const mockedStacksAPI = stacksAPI as jest.Mocked<typeof stacksAPI>;
 
 describe('MembersPage admin CRUD', () => {
   beforeEach(() => {
+    jest.clearAllMocks();
     mockedAuthAPI.getUser.mockReturnValue({ id: 1, email: 'admin@test.com', role: 'admin' } as any);
     mockedStacksAPI.list.mockResolvedValue([
       { id: 1, name: 'Django' },
@@ -57,5 +58,25 @@ describe('MembersPage admin CRUD', () => {
       weekly_hours: 40,
       stack_ids: [1],
     })));
+  });
+
+  it('allows admin to create a new stack inline', async () => {
+    mockedMembersAPI.list.mockResolvedValue([] as any);
+    mockedStacksAPI.list
+      .mockResolvedValueOnce([{ id: 1, name: 'Django' }, { id: 2, name: 'React' }] as any)
+      .mockResolvedValueOnce([{ id: 1, name: 'Django' }, { id: 2, name: 'React' }, { id: 3, name: 'Node.js' }] as any);
+    mockedStacksAPI.create.mockResolvedValue({ id: 3, name: 'Node.js' } as any);
+
+    const { Provider } = require('react-redux');
+    const store = require('../../store').default;
+    render(<Provider store={store}><MembersPage /></Provider>);
+
+    expect(await screen.findByText('Django')).toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText(/Nome da stack/i), { target: { value: 'Node.js' } });
+    fireEvent.click(screen.getByRole('button', { name: /Cadastrar stack/i }));
+
+    await waitFor(() => expect(mockedStacksAPI.create).toHaveBeenCalledWith({ name: 'Node.js' }));
+    expect(await screen.findByText('Node.js')).toBeInTheDocument();
   });
 });

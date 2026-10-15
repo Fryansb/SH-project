@@ -163,16 +163,21 @@ const PriorityPage: React.FC = () => {
 
   const queueProject = queueData?.project ?? selectedProject;
   const selectedProjectLabel = queueProject?.name || 'Fila geral';
+  const hasProjectRequirements = Boolean(queueProject?.required_stacks?.length);
 
   const renderQueueItem = (item: PriorityQueueItem, index: number) => {
     const displayPosition = index + 1;
     const isSelected = item.is_current_user;
+    const isTransparent = hasProjectRequirements && item.matching_stacks.length === 0;
 
     return (
       <Card
         key={item.member_id}
         variant="outlined"
-        sx={isSelected ? { borderColor: 'primary.main', bgcolor: 'action.selected' } : undefined}
+        sx={{
+          ...(isSelected ? { borderColor: 'primary.main', bgcolor: 'action.selected' } : {}),
+        }}
+        style={isTransparent ? { opacity: 0.35 } : undefined}
       >
         <CardContent>
           <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, alignItems: 'flex-start', justifyContent: 'space-between' }}>
@@ -185,7 +190,7 @@ const PriorityPage: React.FC = () => {
 
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, alignItems: 'center' }}>
               <Chip label={`Score ${item.priority_score}`} color={isSelected ? 'secondary' : 'primary'} variant="outlined" />
-              {item.stack_bonus > 0 ? <Chip label={`+${item.stack_bonus} stack`} color="success" variant="outlined" /> : null}
+              {item.stack_bonus > 0 ? <Chip label={`+${item.stack_bonus} pts`} color="success" variant="outlined" /> : null}
               {isSelected ? <Chip label="Você" color="secondary" /> : null}
             </Box>
           </Box>
